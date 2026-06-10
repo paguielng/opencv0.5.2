@@ -1,0 +1,15 @@
+^\.DS_Store$
+^\.travis.yml$
+^\.git$
+^\.gitignore$
+^\.Rhistory$
+^.*\.Rproj$
+^\.Rproj\.user$
+^windows$
+^src/Makevars$
+^appveyor\.yml$
+^LICENSE\.md$
+^README\.md$
+^configure.log$
+^.github$
+^\.github$
