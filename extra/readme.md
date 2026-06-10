@@ -144,3 +144,4 @@ ocv_video(function(input){
   return(ocv_copyto(input, bg, mask))
 })
 ```
+[`ropensci.r-universe.dev`](https://ropensci.r-universe.dev/opencv) or [`opencv-docs`](https://docs.ropensci.org/opencv/)
