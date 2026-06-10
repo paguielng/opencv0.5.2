@@ -1,0 +1,37 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "opencv" in publications use:'
+type: software
+license: MIT
+title: 'opencv: Bindings to ''OpenCV'' Computer Vision Library'
+version: 0.5.2
+doi: 10.32614/CRAN.package.opencv
+identifiers:
+- type: url
+  value: https://ropensci.r-universe.dev/opencv
+abstract: Exposes some of the available 'OpenCV' <https://opencv.org/> algorithms,
+  such as a QR code scanner, and edge, body or face detection. These can either be
+  applied to analyze static images, or to filter live video footage from a camera
+  device.
+authors:
+- family-names: Ooms
+  given-names: Jeroen
+  email: jeroenooms@gmail.com
+  orcid: https://orcid.org/0000-0002-4035-0289
+- family-names: Wijffels
+  given-names: Jan
+repository: https://ropensci.r-universe.dev
+repository-code: https://github.com/ropensci/opencv
+commit: 0db3fcc50520d2c8fc7da9f1185bafc9dae65adc
+url: https://docs.ropensci.org/opencv/
+date-released: '2026-02-21'
+contact:
+- family-names: Ooms
+  given-names: Jeroen
+  email: jeroenooms@gmail.com
+  orcid: https://orcid.org/0000-0002-4035-0289
+

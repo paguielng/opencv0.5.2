@@ -1,0 +1,47 @@
+                 Changes in version 0.5.2 (2026-02-21)                  
+
+    o   Build with CXX17 for now until libopencv fixes the C++20 warnings
+
+                 Changes in version 0.5.0 (2025-03-06)                  
+
+    o   Windows: use opencv from Rtools when available (R >= 4.5)
+
+                 Changes in version 0.4.0 (2023-10-29)                  
+
+    o   Add QR code detector
+
+    o   Windows: update to libopencv 4.8.1
+
+                 Changes in version 0.3.0 (2023-09-25)                  
+
+    o   Windows: update to libopencv 4.8.0
+
+                 Changes in version 0.2.3 (2022-10-15)                  
+
+    o   Compile with CXX17 when available to fix compiler warnings
+
+                 Changes in version 0.2.2 (2022-04-28)                  
+
+    o   MacOS: update binaries to opencv 4.5.5
+
+                         Changes in version 0.2                         
+
+    o   Windows / MacOS: upgrade binary packages to OpenCV 4.4.0
+
+    o   Add ocv_rectangle
+
+    o   Add ocv_polygon
+
+    o   Add ocv_bbox
+
+    o   Add ocv_chull
+
+    o   Add ocv_keypoints for keypoint detection using FAST, Harris
+
+    o   Add ocv_grayscale
+
+    o   Add ocv_version
+
+                  Changes in version 0.1 (2019-04-01)                   
+
+    o   Initial CRAN release

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Package 'opencv' reference manual</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <!-- styling for math. katex.min.css expects fonts in same dir so use CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <link rel="stylesheet" type="text/css" href="https://r-universe.dev/static/R.css">
+
+    <!-- for (future) customizations -->
+    <script src="https://r-universe.dev/static/manual.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://r-universe.dev/static/manual.css">
+
+  </head>
+
+  <body class="postdoc macintosh">
+    <h1 class="manual-title">Package 'opencv'</h1>
+    <table class="description-table">
+      <tr>
+<th>Title:</th>
+<td class="description-title">Bindings to 'OpenCV' Computer Vision Library</td>
+</tr>
+      <tr>
+<th>Description:</th>
+<td class="description-description">Exposes some of the available 'OpenCV'
+        &lt;https://opencv.org/&gt; algorithms, such as a QR code scanner,
+        and edge, body or face detection. These can either be applied
+        to analyze static images, or to filter live video footage from
+        a camera device.</td>
+</tr>
+      <tr>
+<th>Authors:</th>
+<td class="description-author"><span>Jeroen Ooms [aut, cre] (ORCID: &lt;https://orcid.org/0000-0002-4035-0289&gt;),
+  Jan Wijffels [aut]</span></td>
+</tr>
+      <tr>
+<th>Maintainer:</th>
+<td class="description-maintainer">Jeroen Ooms &lt;jeroenooms@gmail.com&gt;</td>
+</tr>
+      <tr>
+<th>License:</th>
+<td class="description-license">MIT + file LICENSE</td>
+</tr>
+      <tr>
+<th>Version:</th>
+<td class="description-version">0.5.2</td>
+</tr>
+      <tr>
+<th>Built:</th>
+<td class="description-date">2026-05-31 06:07:02 UTC</td>
+</tr>
+      <tr>
+<th>Source:</th>
+<td class="description-source">https://github.com/ropensci/opencv</td>
+</tr>
+    </table>
+
+    <a href="#help-index" style="color:black;"><h2 id="help-index">Help Index</h2></a>
+    <ul id="help-index-list">
+<li class="help-index-item"><a href="#opencv">OpenCV Computer Vision</a></li>
+<li class="help-index-item"><a href="#ocv_keypoints">OpenCV keypoints</a></li>
+<li class="help-index-item"><a href="#qrcode">Detect and Decode a QR code</a></li>
+<li class="help-index-item"><a href="#opencv-area">OpenCV area manipulation</a></li>
+</ul>
+
+    <hr>
+    <div class="manual-pages-content">
+<div class="container manual-page" id="opencv"><div class="page-main">
+<a href="#opencv" class="help-page-title"><h2>OpenCV Computer Vision</h2></a>
+
+<h3>Description</h3>
+
+<p>Tools to experiment with computer vision algorithms. Use <a href="#opencv">ocv_read</a> and
+<a href="#opencv">ocv_write</a> to load/save images on disk, or use <a href="#opencv">ocv_picture</a> / <a href="#opencv">ocv_video</a>
+to use your webcam. In RSudio IDE the image objects will automatically be
+displayed in the viewer pane.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">ocv_face(image)
+
+ocv_facemask(image)
+
+ocv_read(path)
+
+ocv_write(image, path)
+
+ocv_destroy(image)
+
+ocv_bitmap(image)
+
+ocv_edges(image)
+
+ocv_picture()
+
+ocv_resize(image, width = 0, height = 0)
+
+ocv_mog2(image)
+
+ocv_knn(image)
+
+ocv_hog(image)
+
+ocv_blur(image, ksize = 5)
+
+ocv_sketch(image, color = TRUE)
+
+ocv_stylize(image)
+
+ocv_markers(image)
+
+ocv_info(image)
+
+ocv_copyto(image, target, mask)
+
+ocv_display(image)
+
+ocv_video(filter, stop_on_result = FALSE)
+
+ocv_grayscale(image)
+
+ocv_version()
+</code><code class="language-r">ocv_face<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_facemask<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_read<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+ocv_write<span class="token punctuation">(</span>image<span class="token punctuation">,</span> path<span class="token punctuation">)</span>
+
+ocv_destroy<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_bitmap<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_edges<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_picture<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+ocv_resize<span class="token punctuation">(</span>image<span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+ocv_mog2<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_knn<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_hog<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_blur<span class="token punctuation">(</span>image<span class="token punctuation">,</span> ksize <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+
+ocv_sketch<span class="token punctuation">(</span>image<span class="token punctuation">,</span> color <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">)</span>
+
+ocv_stylize<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_markers<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_info<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_copyto<span class="token punctuation">(</span>image<span class="token punctuation">,</span> target<span class="token punctuation">,</span> mask<span class="token punctuation">)</span>
+
+ocv_display<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_video<span class="token punctuation">(</span>filter<span class="token punctuation">,</span> stop_on_result <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">)</span>
+
+ocv_grayscale<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+
+ocv_version<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+<h3 class="r-arguments-title">Arguments</h3>
+
+<table role="presentation">
+<tr>
+<td><code id="image">image</code></td>
+<td>
+<p>an ocv image object created from e.g. <code><a href="#opencv">ocv_read()</a></code></p>
+</td>
+</tr>
+<tr>
+<td><code id="path">path</code></td>
+<td>
+<p>image file such as png or jpeg</p>
+</td>
+</tr>
+<tr>
+<td><code id="width">width</code></td>
+<td>
+<p>output width in pixels</p>
+</td>
+</tr>
+<tr>
+<td><code id="height">height</code></td>
+<td>
+<p>output height in pixels</p>
+</td>
+</tr>
+<tr>
+<td><code id="ksize">ksize</code></td>
+<td>
+<p>size of blurring matrix</p>
+</td>
+</tr>
+<tr>
+<td><code id="color">color</code></td>
+<td>
+<p>true or false</p>
+</td>
+</tr>
+<tr>
+<td><code id="target">target</code></td>
+<td>
+<p>the output image</p>
+</td>
+</tr>
+<tr>
+<td><code id="mask">mask</code></td>
+<td>
+<p>only copy pixels from the mask</p>
+</td>
+</tr>
+<tr>
+<td><code id="filter">filter</code></td>
+<td>
+<p>an R function that takes and returns an opecv image</p>
+</td>
+</tr>
+<tr>
+<td><code id="stop_on_result">stop_on_result</code></td>
+<td>
+<p>stop if an object is detected</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden"># Silly example
+mona &lt;- ocv_read('https://jeroen.github.io/images/monalisa.jpg')
+
+# Edge detection
+ocv_edges(mona)
+ocv_markers(mona)
+
+# Find face
+faces &lt;- ocv_face(mona)
+
+# To show locations of faces
+facemask &lt;- ocv_facemask(mona)
+attr(facemask, 'faces')
+
+# This is not strictly needed
+ocv_destroy(mona)
+</code><code class="language-r"><span class="token comment"># Silly example</span>
+mona <span class="token operator">&lt;-</span> ocv_read<span class="token punctuation">(</span><span class="token string">'https://jeroen.github.io/images/monalisa.jpg'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Edge detection</span>
+ocv_edges<span class="token punctuation">(</span>mona<span class="token punctuation">)</span>
+ocv_markers<span class="token punctuation">(</span>mona<span class="token punctuation">)</span>
+
+<span class="token comment"># Find face</span>
+faces <span class="token operator">&lt;-</span> ocv_face<span class="token punctuation">(</span>mona<span class="token punctuation">)</span>
+
+<span class="token comment"># To show locations of faces</span>
+facemask <span class="token operator">&lt;-</span> ocv_facemask<span class="token punctuation">(</span>mona<span class="token punctuation">)</span>
+attr<span class="token punctuation">(</span>facemask<span class="token punctuation">,</span> <span class="token string">'faces'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># This is not strictly needed</span>
+ocv_destroy<span class="token punctuation">(</span>mona<span class="token punctuation">)</span></code></pre>
+
+<hr>
+</div></div>
+<div class="container manual-page" id="ocv_keypoints"><div class="page-main">
+<a href="#ocv_keypoints" class="help-page-title"><h2>OpenCV keypoints</h2></a>
+
+<h3>Description</h3>
+
+<p>Find key points in images
+</p>
+
+
+<h3>Usage</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">ocv_keypoints(
+  image,
+  method = c("FAST", "Harris"),
+  control = ocv_keypoints_options(method, ...),
+  ...
+)
+</code><code class="language-r">ocv_keypoints<span class="token punctuation">(</span>
+  image<span class="token punctuation">,</span>
+  method <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token string">"FAST"</span><span class="token punctuation">,</span> <span class="token string">"Harris"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  control <span class="token operator">=</span> ocv_keypoints_options<span class="token punctuation">(</span>method<span class="token punctuation">,</span> <span class="token ellipsis">...</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token ellipsis">...</span>
+<span class="token punctuation">)</span></code></pre>
+
+
+<h3 class="r-arguments-title">Arguments</h3>
+
+<table role="presentation">
+<tr>
+<td><code id="image">image</code></td>
+<td>
+<p>an ocv grayscale image object</p>
+</td>
+</tr>
+<tr>
+<td><code id="method">method</code></td>
+<td>
+<p>the type of keypoint detection algorithm</p>
+</td>
+</tr>
+<tr>
+<td><code id="control">control</code></td>
+<td>
+<p>a list of arguments passed on to the algorithm</p>
+</td>
+</tr>
+<tr>
+<td><code id="...">...</code></td>
+<td>
+<p>further arguments passed on to ocv_keypoints_options</p>
+</td>
+</tr>
+</table>
+<h3>FAST algorithm arguments</h3>
+
+
+<ul>
+<li>
+<p> threshold threshold on difference between intensity of the central pixel and pixels of a circle around this pixel.
+</p>
+</li>
+<li>
+<p> nonmaxSuppression if true, non-maximum suppression is applied to detected corners (keypoints).
+</p>
+</li>
+<li>
+<p> type one of the three neighborhoods as defined in the paper: TYPE_9_16, TYPE_7_12, TYPE_5_8
+</p>
+</li>
+</ul>
+<h3>Harris algorithm arguments</h3>
+
+
+<ul>
+<li>
+<p> numOctaves the number of octaves in the scale-space pyramid
+</p>
+</li>
+<li>
+<p> corn_thresh the threshold for the Harris cornerness measure
+</p>
+</li>
+<li>
+<p> DOG_thresh the threshold for the Difference-of-Gaussians scale selection
+</p>
+</li>
+<li>
+<p> maxCorners the maximum number of corners to consider
+</p>
+</li>
+<li>
+<p> num_layers the number of intermediate scales per octave
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">mona &lt;- ocv_read('https://jeroen.github.io/images/monalisa.jpg')
+mona &lt;- ocv_resize(mona, width = 320, height = 477)
+
+# FAST-9
+pts &lt;- ocv_keypoints(mona, method = "FAST", type = "TYPE_9_16", threshold = 40)
+# Harris
+pts &lt;- ocv_keypoints(mona, method = "Harris", maxCorners = 50)
+
+# Convex Hull of points
+pts &lt;- ocv_chull(pts)
+
+
+</code><code class="language-r">mona <span class="token operator">&lt;-</span> ocv_read<span class="token punctuation">(</span><span class="token string">'https://jeroen.github.io/images/monalisa.jpg'</span><span class="token punctuation">)</span>
+mona <span class="token operator">&lt;-</span> ocv_resize<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">320</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">477</span><span class="token punctuation">)</span>
+
+<span class="token comment"># FAST-9</span>
+pts <span class="token operator">&lt;-</span> ocv_keypoints<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token string">"FAST"</span><span class="token punctuation">,</span> type <span class="token operator">=</span> <span class="token string">"TYPE_9_16"</span><span class="token punctuation">,</span> threshold <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">)</span>
+<span class="token comment"># Harris</span>
+pts <span class="token operator">&lt;-</span> ocv_keypoints<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token string">"Harris"</span><span class="token punctuation">,</span> maxCorners <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Convex Hull of points</span>
+pts <span class="token operator">&lt;-</span> ocv_chull<span class="token punctuation">(</span>pts<span class="token punctuation">)</span></code></pre>
+
+<hr>
+</div></div>
+<div class="container manual-page" id="qrcode"><div class="page-main">
+<a href="#qrcode" class="help-page-title"><h2>Detect and Decode a QR code</h2></a>
+
+<h3>Description</h3>
+
+<p>Detect and decode a QR code from an image or camera. By default it returns
+the text value from the QR code if detected, or NULL if no QR was found. If
+<code>draw = TRUE</code> then it returns an annotated image with the position and
+value of the QR drawn into the image, and qr text value as an attribute.
+The <code>qr_scanner</code> function opens the camera device (if available on your
+computer) and repeats <a href="#qrcode">ocv_qr_detect</a> until it a QR is detected.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">ocv_qr_detect(image, draw = FALSE, decoder = c("wechat", "quirc"))
+
+qr_scanner(draw = FALSE, decoder = c("wechat", "quirc"))
+</code><code class="language-r">ocv_qr_detect<span class="token punctuation">(</span>image<span class="token punctuation">,</span> draw <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span> decoder <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token string">"wechat"</span><span class="token punctuation">,</span> <span class="token string">"quirc"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+qr_scanner<span class="token punctuation">(</span>draw <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span> decoder <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token string">"wechat"</span><span class="token punctuation">,</span> <span class="token string">"quirc"</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+
+<h3 class="r-arguments-title">Arguments</h3>
+
+<table role="presentation">
+<tr>
+<td><code id="image">image</code></td>
+<td>
+<p>an ocv image object created from e.g. <code><a href="#opencv">ocv_read()</a></code></p>
+</td>
+</tr>
+<tr>
+<td><code id="draw">draw</code></td>
+<td>
+<p>if TRUE, the function returns an annotated image showing
+the position and value of the QR code.</p>
+</td>
+</tr>
+<tr>
+<td><code id="decoder">decoder</code></td>
+<td>
+<p>which decoder implementation to use, see details.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>OpenCV has two separate QR decoders. The 'wechat' decoder was added in
+libopencv 4.5.2 and generally has better performance and fault-tolerance.
+The old 'quirc' decoder is available on some older versions of libopencv as
+a plug-in, but many Linux distros did not include it. If you get an error
+<em>Library QUIRC is not linked. No decoding is performed.</em> this sadly means
+your Linux distribution is too old and does not support QR decoding.
+</p>
+
+
+<h3>Value</h3>
+
+<p>if a QR code is detected, this returns either the text value of the QR,
+or if <code>draw</code> it returns the annotated image, with the value as an attribute.
+Returns NULL if no QR was found in the image.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">png("test.png")
+plot(qrcode::qr_code("This is a test"))
+dev.off()
+ocv_qr_detect(ocv_read('test.png'))
+unlink("test.png")
+</code><code class="language-r">png<span class="token punctuation">(</span><span class="token string">"test.png"</span><span class="token punctuation">)</span>
+plot<span class="token punctuation">(</span>qrcode<span class="token operator">::</span>qr_code<span class="token punctuation">(</span><span class="token string">"This is a test"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+dev.off<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ocv_qr_detect<span class="token punctuation">(</span>ocv_read<span class="token punctuation">(</span><span class="token string">'test.png'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+unlink<span class="token punctuation">(</span><span class="token string">"test.png"</span><span class="token punctuation">)</span></code></pre>
+
+<hr>
+</div></div>
+<div class="container manual-page" id="opencv-area"><div class="page-main">
+<a href="#opencv-area" class="help-page-title"><h2>OpenCV area manipulation</h2></a>
+
+<h3>Description</h3>
+
+<p>Manipulate image regions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">ocv_rectangle(image, x = 0L, y = 0L, width, height)
+
+ocv_polygon(image, pts, convex = FALSE, crop = FALSE, color = 255)
+
+ocv_bbox(image, pts)
+
+ocv_chull(pts)
+</code><code class="language-r">ocv_rectangle<span class="token punctuation">(</span>image<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">0L</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">0L</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span>
+
+ocv_polygon<span class="token punctuation">(</span>image<span class="token punctuation">,</span> pts<span class="token punctuation">,</span> convex <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span> crop <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span> color <span class="token operator">=</span> <span class="token number">255</span><span class="token punctuation">)</span>
+
+ocv_bbox<span class="token punctuation">(</span>image<span class="token punctuation">,</span> pts<span class="token punctuation">)</span>
+
+ocv_chull<span class="token punctuation">(</span>pts<span class="token punctuation">)</span></code></pre>
+
+
+<h3 class="r-arguments-title">Arguments</h3>
+
+<table role="presentation">
+<tr>
+<td><code id="image">image</code></td>
+<td>
+<p>an ocv image object</p>
+</td>
+</tr>
+<tr>
+<td><code id="x">x</code></td>
+<td>
+<p>horizontal location</p>
+</td>
+</tr>
+<tr>
+<td><code id="y">y</code></td>
+<td>
+<p>vertical location</p>
+</td>
+</tr>
+<tr>
+<td><code id="width">width</code></td>
+<td>
+<p>width of the area</p>
+</td>
+</tr>
+<tr>
+<td><code id="height">height</code></td>
+<td>
+<p>height of the area</p>
+</td>
+</tr>
+<tr>
+<td><code id="pts">pts</code></td>
+<td>
+<p>a list of points with elements x and y</p>
+</td>
+</tr>
+<tr>
+<td><code id="convex">convex</code></td>
+<td>
+<p>are the points convex</p>
+</td>
+</tr>
+<tr>
+<td><code id="crop">crop</code></td>
+<td>
+<p>crop the resulting area to its bounding box</p>
+</td>
+</tr>
+<tr>
+<td><code id="color">color</code></td>
+<td>
+<p>color for the non-polygon area</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre class="language-r"><code class="language-r-input" hidden="hidden">mona &lt;- ocv_read('https://jeroen.github.io/images/monalisa.jpg')
+
+# Rectangular area
+ocv_rectangle(mona, x = 400, y = 300, height = 300, width = 350)
+ocv_rectangle(mona, x = 0, y = 100, height = 200)
+ocv_rectangle(mona, x = 500, y = 0, width = 75)
+
+# Polygon area
+img &lt;- ocv_resize(mona, width = 320, height = 477)
+pts &lt;- list(x = c(184, 172, 146, 114,  90,  76,  92, 163, 258),
+            y = c(72,   68,  70,  90, 110, 398, 412, 385, 210))
+ocv_polygon(img, pts)
+ocv_polygon(img, pts, crop = TRUE)
+ocv_polygon(img, pts, convex = TRUE, crop = TRUE)
+
+# Bounding box based on points
+ocv_bbox(img, pts)
+
+# Bounding box of non-zero pixel area
+area &lt;- ocv_polygon(img, pts, color = 0, crop = FALSE)
+area
+area &lt;- ocv_bbox(area)
+area
+
+
+</code><code class="language-r">mona <span class="token operator">&lt;-</span> ocv_read<span class="token punctuation">(</span><span class="token string">'https://jeroen.github.io/images/monalisa.jpg'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Rectangular area</span>
+ocv_rectangle<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">400</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">350</span><span class="token punctuation">)</span>
+ocv_rectangle<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">)</span>
+ocv_rectangle<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">75</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Polygon area</span>
+img <span class="token operator">&lt;-</span> ocv_resize<span class="token punctuation">(</span>mona<span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">320</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">477</span><span class="token punctuation">)</span>
+pts <span class="token operator">&lt;-</span> list<span class="token punctuation">(</span>x <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token number">184</span><span class="token punctuation">,</span> <span class="token number">172</span><span class="token punctuation">,</span> <span class="token number">146</span><span class="token punctuation">,</span> <span class="token number">114</span><span class="token punctuation">,</span>  <span class="token number">90</span><span class="token punctuation">,</span>  <span class="token number">76</span><span class="token punctuation">,</span>  <span class="token number">92</span><span class="token punctuation">,</span> <span class="token number">163</span><span class="token punctuation">,</span> <span class="token number">258</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            y <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token number">72</span><span class="token punctuation">,</span>   <span class="token number">68</span><span class="token punctuation">,</span>  <span class="token number">70</span><span class="token punctuation">,</span>  <span class="token number">90</span><span class="token punctuation">,</span> <span class="token number">110</span><span class="token punctuation">,</span> <span class="token number">398</span><span class="token punctuation">,</span> <span class="token number">412</span><span class="token punctuation">,</span> <span class="token number">385</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ocv_polygon<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pts<span class="token punctuation">)</span>
+ocv_polygon<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pts<span class="token punctuation">,</span> crop <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">)</span>
+ocv_polygon<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pts<span class="token punctuation">,</span> convex <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">,</span> crop <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Bounding box based on points</span>
+ocv_bbox<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pts<span class="token punctuation">)</span>
+
+<span class="token comment"># Bounding box of non-zero pixel area</span>
+area <span class="token operator">&lt;-</span> ocv_polygon<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pts<span class="token punctuation">,</span> color <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> crop <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">)</span>
+area
+area <span class="token operator">&lt;-</span> ocv_bbox<span class="token punctuation">(</span>area<span class="token punctuation">)</span>
+area</code></pre>
+
+<hr>
+</div></div>
+</div>
+    <footer><p>Rendered with postdoc 1.4.2</p></footer>
+  </body>
+</html>

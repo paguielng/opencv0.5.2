@@ -1,0 +1,15 @@
+To cite package ‘opencv’ in publications use:
+
+  Ooms J, Wijffels J (2026). _opencv: Bindings to 'OpenCV' Computer
+  Vision Library_. R package version 0.5.2,
+  <https://github.com/ropensci/opencv>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {opencv: Bindings to 'OpenCV' Computer Vision Library},
+    author = {Jeroen Ooms and Jan Wijffels},
+    year = {2026},
+    note = {R package version 0.5.2},
+    url = {https://github.com/ropensci/opencv},
+  }

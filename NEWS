@@ -1,0 +1,31 @@
+0.5.2
+  - Build with CXX17 for now until libopencv fixes the C++20 warnings
+
+0.5.0
+  - Windows: use opencv from Rtools when available (R >= 4.5)
+
+0.4.0
+  - Add QR code detector
+  - Windows: update to libopencv 4.8.1
+
+0.3.0
+  - Windows: update to libopencv 4.8.0
+
+0.2.3
+  - Compile with CXX17 when available to fix compiler warnings
+
+0.2.2
+  - MacOS: update binaries to opencv 4.5.5
+
+0.2
+  - Windows / MacOS: upgrade binary packages to OpenCV 4.4.0
+  - Add ocv_rectangle
+  - Add ocv_polygon
+  - Add ocv_bbox
+  - Add ocv_chull
+  - Add ocv_keypoints for keypoint detection using FAST, Harris
+  - Add ocv_grayscale
+  - Add ocv_version
+
+0.1
+  - Initial CRAN release

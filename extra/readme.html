@@ -1,0 +1,108 @@
+<div class="commonmark-readme-html">
+<h1>Bindings to 'OpenCV' Computer Vision Library</h1>
+<blockquote>
+<p>Experimenting with computer vision and machine learning in R. This
+package exposes some of the available 'OpenCV' <a href="https://opencv.org/">https://opencv.org/</a> algorithms,
+such as edge, body or face detection. These can either be applied to analyze
+static images, or to filter live video footage from a camera device.</p>
+</blockquote>
+<p><a href="http://cran.r-project.org/package=opencv"><img src="http://www.r-pkg.org/badges/version/opencv" alt="CRAN_Status_Badge"></a>
+<a href="http://cran.r-project.org/web/packages/opencv/index.html"><img src="http://cranlogs.r-pkg.org/badges/opencv" alt="CRAN RStudio mirror downloads"></a></p>
+<h2>Installation</h2>
+<p>On Windows and MacOS, the package can be installed directoy from CRAN:</p>
+<pre><code class="language-r">install.packages("opencv")
+</code></pre>
+<h3>Install from source</h3>
+<p>To install from source on MacOS, you need to install the opencv library from homebrew:</p>
+<pre><code class="language-sh">brew install opencv
+</code></pre>
+<p>On Ubuntu or Fedora you need <a href="https://packages.debian.org/testing/libopencv-dev"><code>libopencv-dev</code></a> or <a href="https://src.fedoraproject.org/rpms/opencv"><code>opencv-devel</code></a>:</p>
+<pre><code class="language-sh">sudo apt-get install libopencv-dev
+</code></pre>
+<p>And then install the R bindings:</p>
+<pre><code class="language-r">install.packages("opencv", type = "source")
+</code></pre>
+<h2>Basic stuff:</h2>
+<p>Face recognition:</p>
+<pre><code class="language-r">unconf &lt;- ocv_read('https://jeroen.github.io/images/unconf18.jpg')
+faces &lt;- ocv_face(unconf)
+ocv_write(faces, 'faces.jpg')
+</code></pre>
+<p>Or get the face location data:</p>
+<pre><code class="language-r">facemask &lt;- ocv_facemask(unconf)
+attr(facemask, 'faces')
+</code></pre>
+<h2>Live Webcam Examples</h2>
+<p>Live face detection:</p>
+<pre><code class="language-r">library(opencv)
+ocv_video(ocv_face)
+</code></pre>
+<p>Edge detection:</p>
+<pre><code class="language-r">library(opencv)
+ocv_video(ocv_edges)
+</code></pre>
+<h2>Combine with Graphics</h2>
+<p>Replaces the background with a plot:</p>
+<pre><code class="language-r">library(opencv)
+library(ggplot2)
+
+# get webcam size
+test &lt;- ocv_picture()
+bitmap &lt;- ocv_bitmap(test)
+width &lt;- dim(bitmap)[2]
+height &lt;- dim(bitmap)[3]
+
+png('bg.png', width = width, height = height)
+par(ask=FALSE)
+print(ggplot2::qplot(speed, dist, data = cars, geom = c("smooth", "point")))
+dev.off()
+bg &lt;- ocv_read('bg.png')
+unlink('pg.png')
+ocv_video(function(input){
+  mask &lt;- ocv_mog2(input)
+  return(ocv_copyto(input, bg, mask))
+})
+</code></pre>
+<p>Put your face in the plot:</p>
+<pre><code class="language-r"># Overlay face filter
+ocv_video(function(input){
+  mask &lt;- ocv_facemask(input)
+  ocv_copyto(input, bg, mask)
+})
+</code></pre>
+<h2>Live Face Survey</h2>
+<p>Go stand on the left if you're a tidier</p>
+<pre><code class="language-r">library(opencv)
+
+# get webcam size
+test &lt;- ocv_picture()
+bitmap &lt;- ocv_bitmap(test)
+width &lt;- dim(bitmap)[2]
+height &lt;- dim(bitmap)[3]
+
+# generates the plot
+makeplot &lt;- function(x){
+  png('bg.png', width = width, height = height, res = 96)
+  on.exit(unlink('bg.png'))
+  groups &lt;- seq(0, width, length.out = 4)
+  left &lt;- rep("left", sum(x &lt; groups[2]))
+  middle &lt;- rep("middle", sum(x &gt;= groups[2] &amp; x &lt; groups[3]))
+  right &lt;- rep("right", sum(x &gt;= groups[3]))
+  f &lt;- factor(c(left, middle, right), levels = c('left', 'middle', 'right'),
+              labels = c("Tidy!", "Whatever Works", "Base!"))
+  color = I(c("#F1BB7B", "#FD6467", "#5B1A18"))
+  plot(f, ylim = c(0, 5),
+       main = "Are you a tidyer or baser?", col = color)
+  dev.off()
+  ocv_read('bg.png')
+}
+
+# overlays faces on the plot
+ocv_video(function(input){
+  mask &lt;- ocv_facemask(input)
+  faces &lt;- attr(mask, 'faces')
+  bg &lt;- makeplot(faces$x)
+  return(ocv_copyto(input, bg, mask))
+})
+</code></pre>
+</div>
